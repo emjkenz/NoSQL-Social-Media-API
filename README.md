@@ -23,3 +23,9 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 ## Example
 ![Example](./assets/18-nosql-homework-demo-01.gif)
+
+## Video Walkthrough
+Check out the video [here](https://drive.google.com/file/d/1sDrGf-aqRLfvlTOhWxkvgltqhQXCfHau/view)
+
+## Licence
+This repo is licenced under the MIT licence
