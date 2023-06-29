@@ -18,4 +18,19 @@ router.get('/', (req, res) => {
         .catch(err => res.json(err));
 });
 
+// Create a new thought reaction
+router.post('/:id/reactions', (req, res) => {
+    Reaction.create(req.body)
+        .then(({ _id }) => {
+            return Thought.findByIdAndUpdate(
+                req.params.id,
+                { $push: { reactions: _id } },
+                { new: true }
+            );
+        })
+        .then(data => res.json(data))
+        .catch(err => res.json(err));
+});
+
+
 module.exports = router;
