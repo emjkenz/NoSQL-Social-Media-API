@@ -46,7 +46,17 @@ router.post('/:userId/friends/:friendId', (req, res) => {
             friends: req.params.friendId 
         }
     }, { new: true })
-        .then(data => res.json(` User ${data.username} updated.`))
+        .then(data => res.json(`User ${data.username}'s friends updated.`))
+        .catch(err => res.json(err));
+});
+
+router.delete('/:userId/friends/:friendId', (req, res) => {
+    User.findByIdAndUpdate(req.params.userId, {
+        $pull: {
+            friends: req.params.friendId
+        }
+    }, { new: true })
+        .then(data => res.json(`Removed ${data.username}'s friend.`))
         .catch(err => res.json(err));
 });
 
