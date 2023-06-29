@@ -1,13 +1,20 @@
 const express = require('express');
-const { User, Thought } = require('../models');
+const { User, Thought, Reaction } = require('../models');
 
 const router = express.Router();
 
 // Routes
 // Create a new thought
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
     Thought.create(req.body)
-        .then(data => res.json({ message: 'Thought created.'}))
+        .then(({ _id }) => {
+            return User.findByIdAndUpdate(
+                req.params.id,
+                { $push: { thoughts: _id } },
+                { new: true }
+            );
+        })
+        .then(data => res.json(data))
         .catch(err => res.json(err));
 });
 
